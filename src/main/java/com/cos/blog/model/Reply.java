@@ -1,6 +1,6 @@
 package com.cos.blog.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Reply {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private int id;
 	
 	@Column(nullable = false, length = 200)

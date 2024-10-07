@@ -1,12 +1,15 @@
 package com.cos.blog.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,6 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+// @DynamicInsert	// insert 할때 null 인 값은 제외하고 insert 구문을 생성
 public class User {
 	@Id	// Primary Key
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	//프로젝트에서 연결된 DB 넘버링 전략을 따라감
@@ -34,8 +38,9 @@ public class User {
 	@Column(nullable = false, length = 50)
 	private String email;
 	
-	@ColumnDefault("'user'")
-	private String role; // Enum을 쓰는게 좋다
+	//@ColumnDefault("'user'")
+	@Enumerated(EnumType.STRING)	// DB에 해당 타입이 String 이라고 알려줌
+	private RoleType role; 
 	
 	@CreationTimestamp	// 시간 자동 입력
 	private Timestamp createDate;
