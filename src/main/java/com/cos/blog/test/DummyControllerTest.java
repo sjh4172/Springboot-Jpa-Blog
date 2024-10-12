@@ -31,7 +31,7 @@ public class DummyControllerTest {
 	
 	@DeleteMapping("/dummy/user/{id}")
 	public String delete(@PathVariable int id) {
-	    if (!userRepository.existsById(id)) {
+	    if (!userRepository.existsById(id)) {	// 해당 id 를 가진 user 가 존재하는지 확인 
 	        throw new IllegalArgumentException("해당 id는 존재하지 않습니다. id: " + id);
 	    }
 	    userRepository.deleteById(id);

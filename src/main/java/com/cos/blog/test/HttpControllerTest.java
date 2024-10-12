@@ -24,11 +24,11 @@ public class HttpControllerTest {
 		return "lombok Test 완료";
 	}
 	@GetMapping("/http/get")
-	public String getTest(Member m) { // 요청시 자동으로 스프링이 Member에 id=1&username="test"를 넣어줌
+	public String getTest(Member m) { // 요청시 자동으로 스프링이 Member 에 id=1&username="test"를 넣어줌
 		return "get요청:" + m.getId() + "," + m.getUsername();
 	}
 	@PostMapping("/http/post")
-	public String postTest(@RequestBody Member m) { // MessageConverter 스프링부트가 자동으로 Member에 매핑
+	public String postTest(@RequestBody Member m) { // MessageConverter 스프링부트가 자동으로 Member 에 매핑
 		return "post요청"+ m.getId() + "," + m.getUsername() +"," + m.getEmail() + "," + m.getPassword();			  
 	}
 	@PutMapping("/http/put")
