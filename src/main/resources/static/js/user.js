@@ -15,7 +15,7 @@ let index = {
 		console.log(data);
 		
 		// ajax 통신을 이용해 3개의 데이터를 json으로 변경하여 insert 요청
-		/*
+		
 		$.ajax({
 			// 회원가입 수행 요청
 			type: "POST",
@@ -31,7 +31,7 @@ let index = {
 			// 회원가입 실패
 			alert(JSON.stringify(error));
 		});	
-		*/
+		
 	}
 }
 
