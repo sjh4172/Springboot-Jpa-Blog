@@ -2,6 +2,7 @@ package com.cos.blog.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,12 +20,12 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
+	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) {
 		// 실제로 DB에 insert 하고 return 해주면 됨
 		System.out.println("save 호출");
-		user.setRole(RoleType.USER);		// 회원가입시 Role 은 회원이 선택 X, 일반적인 경우 USER로 넣어줌
-		int result = userService.회원가입(user);
+		userService.회원가입(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 	// 회원가입 결과 Return
 	}
 //	
