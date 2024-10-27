@@ -2,6 +2,7 @@ package com.cos.blog.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.reactive.PathRequest;
+import org.springframework.cglib.proxy.Dispatcher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.cos.blog.config.auth.PrincipalDetailService;
 
+import jakarta.servlet.DispatcherType;
 import lombok.RequiredArgsConstructor;
 
 @Configuration	// 빈 등록
@@ -49,11 +51,10 @@ public class SecurityConfig{
 					loginPage("/auth/loginForm").permitAll(). // 로그인 페이지 설정
 					loginProcessingUrl("/auth/loginProc").defaultSuccessUrl("/")).	// 스프링 시큐리티가 해당주소로 요청오는 로그인을 가로채서 대신 로그인
 			authorizeHttpRequests(authz -> authz.	
+					dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll().	//FORWARD 요청에 대해 추가적인 인증 없이 접근 가능
 					requestMatchers("/auth/loginForm").permitAll().	
-					requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**", "/**").permitAll().	// /auth 로 시작하는 요청에 대해 모두 허용
+					requestMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll().	// /auth 로 시작하는 요청에 대해 모두 허용
 					anyRequest().authenticated()); 	// 나머지는 인증된 사용자만 허용
-			
-		
 		
 		return http.build();
 	}
