@@ -48,7 +48,7 @@ public class SecurityConfig{
 		http.
 			csrf(csrf->csrf.disable()).	// csrf 토큰 비활성화 (테스트 할때는 걸어 두는 것이 좋음)
 			formLogin(formLogin->formLogin.
-					loginPage("/auth/loginForm").permitAll(). // 로그인 페이지 설정
+					loginPage("/auth/loginForm").permitAll(). // 로그인 폼 페이지 설정
 					loginProcessingUrl("/auth/loginProc").defaultSuccessUrl("/")).	// 스프링 시큐리티가 해당주소로 요청오는 로그인을 가로채서 대신 로그인
 			authorizeHttpRequests(authz -> authz.	
 					dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll().	//FORWARD 요청에 대해 추가적인 인증 없이 접근 가능

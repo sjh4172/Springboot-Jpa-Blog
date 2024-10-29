@@ -6,6 +6,9 @@ let index = {
 //		$("#btn-login").on("click", ()=>{
 //					this.login();
 //				});
+		$("#btn-update").on("click", ()=>{
+			this.update();
+		});
 	},
 	
 	save: function(){
@@ -37,6 +40,30 @@ let index = {
 		
 	},
 	
+	update: function(){
+			let data = {
+				id: $("#id").val(),
+				password: $("#password").val(),
+				email: $("#email").val()
+			};
+			console.log(data);
+			
+			
+			$.ajax({
+				type: "PUT",
+				url: "/user",
+				data: JSON.stringify(data),	// http body 데이터
+				contentType: "application/json; charset=utf-8", 	// body 데이터가 어떤 타입인지
+				dataType: "json"	// 응답
+			}).done(function(resp){
+				alert("회원수정이 완료되었습니다.");
+				location.href="/";
+			}).fail(function(error){
+				alert(JSON.stringify(error));
+			});	
+			
+		},
+		
 	/*
 	login: function(){
 			//alert("user의 save 함수 호출됨");
